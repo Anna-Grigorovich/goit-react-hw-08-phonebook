@@ -3,7 +3,6 @@ import { Filter } from './Filter/Filter';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ToastContainer } from 'react-toastify';
 
-import css from './App.module.css';
 import { Layout } from './Layout/Layout';
 import { Registration } from './Registration/Registration';
 import { Login } from './Login/Login';
@@ -45,13 +44,6 @@ const App = () => {
                 </PublicRoute>
               }
             />
-            {/* <PublicRoute exact path="/register" restricted>
-          <Registration />
-        </PublicRoute>
-        <PublicRoute exact path="/login" redirectTo="/" restricted>
-          <Login />
-        </PublicRoute> */}
-
             <Route
               path="/"
               element={
