@@ -9,7 +9,7 @@ import { addContact } from 'redux/contactsOperation';
 
 export const ContactForm = () => {
   const [state, setState] = useState({ name: '', number: '' });
-const contacts = useSelector(getContacts);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleForm = e => {
@@ -18,9 +18,9 @@ const contacts = useSelector(getContacts);
     const nameArray = contacts.map(contact => contact.name.toLowerCase());
     if (!nameArray.includes(name.value.toLowerCase())) {
       const arrayCont = {
-        id: nanoid(),
+        // id: nanoid(),
         name: name.value,
-        phone: number.value,
+        number: number.value,
       };
       dispatch(addContact(arrayCont));
       reset();

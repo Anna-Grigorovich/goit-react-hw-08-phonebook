@@ -1,18 +1,73 @@
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { ContactForm } from './ContactForm/ContactForm';
+import { ToastContainer } from 'react-toastify';
 
 import css from './App.module.css';
+import { Layout } from './Layout/Layout';
+import { Registration } from './Registration/Registration';
+import { Login } from './Login/Login';
+import { PublicRoute } from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import operations from 'redux/auth/authOperation';
+import { useEffect } from 'react';
+import { getIsFetchingCurrent } from 'redux/selectors';
 const App = () => {
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(getIsFetchingCurrent);
+  useEffect(() => {
+    dispatch(operations.fetchCurrentUser());
+  }, [dispatch]);
   return (
-    <div className={css.app}>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <p>Find contacts by name</p>
-      <Filter />
-      <ContactList />
-    </div>
+    <>
+      {isFetchingCurrentUser ? (
+        <h1>LOADING</h1>
+      ) : (
+        <>
+          <ToastContainer />
+          <Layout />
+          <Routes>
+            <Route
+              path="/register"
+              element={
+                <PublicRoute restricted>
+                  <Registration />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute restricted>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            {/* <PublicRoute exact path="/register" restricted>
+          <Registration />
+        </PublicRoute>
+        <PublicRoute exact path="/login" redirectTo="/" restricted>
+          <Login />
+        </PublicRoute> */}
+
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <ContactForm />
+                  <h2>Contacts</h2>
+                  <p>Find contacts by name</p>
+                  <Filter />
+                  <ContactList />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </>
+      )}
+    </>
   );
 };
 

@@ -7,15 +7,14 @@ export const ContactList = () => {
   // const store = useSelector(store => store);
   const filters = useSelector(filterContact);
   const contacts = useSelector(getContacts);
-  const isLoading = useSelector(state => state.contacts.isLoading)
-  console.log(isLoading)
+  const isLoading = useSelector(state => state.contacts.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllContacts());
   }, [dispatch]);
 
-    const getVisibleContacts = () => {
+  const getVisibleContacts = () => {
     const normalizeFilter = filters.toLowerCase();
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizeFilter)
@@ -29,16 +28,16 @@ export const ContactList = () => {
   return (
     <>
       {isLoading && <p>LOADING...</p>}
-    <ul>
-      {visibleContacts.map(contact => {
-        return (
-          <li key={contact.id} id={contact.id}>
-            {`${contact.name}: ${contact.phone}`}
-            <button onClick={() => deleteContact(contact.id)}>Delete</button>
-          </li>
-        );
-      })}
+      <ul>
+        {visibleContacts.map(contact => {
+          return (
+            <li key={contact.id} id={contact.id}>
+              {`${contact.name}: ${contact.number}`}
+              <button onClick={() => deleteContact(contact.id)}>Delete</button>
+            </li>
+          );
+        })}
       </ul>
-      </>
+    </>
   );
 };
