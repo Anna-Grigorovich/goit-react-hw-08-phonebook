@@ -56,6 +56,18 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="*"
+              element={
+                <PrivateRoute>
+                  <ContactForm />
+                  <h2>Contacts</h2>
+                  <p>Find contacts by name</p>
+                  <Filter />
+                  <ContactList />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </>
       )}
