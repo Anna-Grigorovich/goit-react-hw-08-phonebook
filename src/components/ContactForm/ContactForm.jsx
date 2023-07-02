@@ -17,7 +17,6 @@ export const ContactForm = () => {
     const nameArray = contacts.map(contact => contact.name.toLowerCase());
     if (!nameArray.includes(name.value.toLowerCase())) {
       const arrayCont = {
-        // id: nanoid(),
         name: name.value,
         number: number.value,
       };

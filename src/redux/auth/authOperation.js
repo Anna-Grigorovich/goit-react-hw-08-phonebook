@@ -25,7 +25,6 @@ const register = createAsyncThunk('auth/register', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error.message);
     toast.error(`something went wrong try again`, {
       position: 'top-right',
       autoClose: 5000,
